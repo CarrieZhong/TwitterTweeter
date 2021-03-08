@@ -6,316 +6,1073 @@
 	},
 	"item": [
 		{
-			"name": "Signup: first new account",
-			"event": [
+			"name": "Part 1 Test Cases",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "f475f70f-5977-4779-890c-c3e2d9c1dc21",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body('\"user alice123 signed up\"');",
-							"});"
-						],
-						"type": "text/javascript"
-					}
+					"name": "Signup: first new account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f475f70f-5977-4779-890c-c3e2d9c1dc21",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body('\"user alice123 signed up\"');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"alice123\",\n    \"password\": \"alice\",\n    \"displayName\": \"Alice\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/signup/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signup",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup: existing username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a1f967dc-444e-49ba-9e78-a9ce0e5b7bdf",
+								"exec": [
+									"pm.test(\"Status code is 409\", function () {",
+									"    pm.response.to.have.status(409);",
+									"});",
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body(\"username alice123 already exists\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"alice123\",\n    \"password\": \"alice\",\n    \"displayName\": \"Alice\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/signup/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signup",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup: second new account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "65190e08-3f0a-4391-b10d-5ebf8f3b183c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body('\"user bob234 signed up\"');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"bob234\",\n    \"password\": \"bob\",\n    \"displayName\": \"Bobby\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/signup/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signup",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin: correct account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "61c4763f-797a-4a78-99ab-a864b69d888c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body('\"user bob234 signed in\"');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"bob234\",\n    \"password\": \"bob\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/signin/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin: username doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "495a4701-c1a8-4b1d-9072-ef77f7c844a9",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body(\"access denied\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"bob\",\n    \"password\": \"bob\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/signin/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signin: wrong password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d74602a0-c2a3-438a-84df-42970b2d6482",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body(\"access denied\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"bob234\",\n    \"password\": \"bobby\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/signin/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "beea5754-7f27-4377-832d-e6f25116a56f",
+								"exec": [
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body(\"Found. Redirecting to /\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/signout/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signout",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"alice123\",\n    \"password\": \"alice\",\n    \"display_name\": \"Alice\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/signup/",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"signup",
-						""
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Signup: existing username",
-			"event": [
+			"name": "Tweets: signed in, right user",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "a1f967dc-444e-49ba-9e78-a9ce0e5b7bdf",
-						"exec": [
-							"pm.test(\"Status code is 409\", function () {",
-							"    pm.response.to.have.status(409);",
-							"});",
-							"",
-							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body(\"username alice123 already exists\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
+					"name": "Signin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0dfbe8ce-ce2d-4e87-ad70-ed413d7dda3e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body('\"user bob234 signed in\"');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"bob234\",\n    \"password\": \"bob\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/signin/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post tweet 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a3468e9-ef81-47da-aa05-be52d85a27ad",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.globals.set(\"bobTweetId\", pm.response.json()._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"hello world!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post tweet 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f64a9455-2791-4590-a71c-9c9048d69151",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.globals.set(\"tweetId_toBeDeleted\", pm.response.json()._id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"hello from bob\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update tweet (id exists)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f9b678fe-9fd9-4c5e-b280-258a1b705e33",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"hello again!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/{{tweetId_toBeDeleted}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								"{{tweetId_toBeDeleted}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete tweet (id exists)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d90172f6-27ad-453c-a4b7-faa1f1150ff5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/{{tweetId_toBeDeleted}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								"{{tweetId_toBeDeleted}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update tweet (id doesn't exist)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5bd0ab57-236e-48c4-bc57-18989108cdfd",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"hello one more time!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/{{tweetId_toBeDeleted}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								"{{tweetId_toBeDeleted}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete tweet (id doesn't exist)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "75a67ea1-6ca4-4e83-b5b9-a639d962140f",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/{{tweetId_toBeDeleted}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								"{{tweetId_toBeDeleted}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ec0baa1c-2804-4c7e-870f-34cf89e95ce0",
+								"exec": [
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body(\"Found. Redirecting to /\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/signout/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signout",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"alice123\",\n    \"password\": \"alice\",\n    \"display_name\": \"Alice\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/signup/",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"signup",
-						""
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Signup: second new account",
-			"event": [
+			"name": "Tweets: signed out",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "65190e08-3f0a-4391-b10d-5ebf8f3b183c",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body(\"user bob234 signed up\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
+					"name": "Post tweet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aa985d79-85ba-404c-bb8b-080671b93794",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body(\"access denied\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"hello world, from anon\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update tweet (id exists)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b0cec07c-e9d0-4d38-ab52-3a3394eb4928",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"hello again, from anon\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/{{bobTweetId}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								"{{bobTweetId}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete tweet (id exists)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ab6744d8-6c3c-4970-9eb8-bbf3c20dd2c3",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/{{bobTweetId}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								"{{bobTweetId}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update tweet (id doesn't exist)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e6d906af-b324-4601-8695-bb53fca6bed9",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"hello one more time, from anon\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/{{tweetId_toBeDeleted}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								"{{tweetId_toBeDeleted}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete tweet (id doesn't exist)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "78ed9625-aa29-4448-9187-b6377ae71230",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/{{tweetId_toBeDeleted}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								"{{tweetId_toBeDeleted}}",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"bob234\",\n    \"password\": \"bob\",\n    \"display_name\": \"Bobby\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/signup/",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"signup",
-						""
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Signin: correct account",
-			"event": [
+			"name": "Tweets: signed in, wrong user",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "61c4763f-797a-4a78-99ab-a864b69d888c",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body('\"user bob234 signed in\"');",
-							"});"
-						],
-						"type": "text/javascript"
-					}
+					"name": "Signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"alice123\",\n    \"password\": \"bob\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/signin/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update tweet (id exists)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1dd4605d-c445-4ea1-a380-313ce1cd951c",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"hello world, from another user\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/{{bobTweetId}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								"{{bobTweetId}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete tweet (id exists)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0a94cbc6-ef8d-4e96-b583-cef27854c02f",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/api/tweets/{{bobTweetId}}/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tweets",
+								"{{bobTweetId}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7fc91bc7-f7ba-4e9a-91c1-825e508ec40e",
+								"exec": [
+									"pm.test(\"Body is correct\", function () {",
+									"    pm.response.to.have.body(\"Found. Redirecting to /\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"followRedirects": false
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/signout/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"signout",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"bob234\",\n    \"password\": \"bob\",\n    \"display_name\": \"Bobby\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/signin/",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"signin",
-						""
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Signin: wrong username",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "495a4701-c1a8-4b1d-9072-ef77f7c844a9",
-						"exec": [
-							"pm.test(\"Status code is 401\", function () {",
-							"    pm.response.to.have.status(401);",
-							"});",
-							"",
-							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body(\"access denied\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"bob\",\n    \"password\": \"bob\",\n    \"display_name\": \"Bobby\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/signin/",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"signin",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Signin: wrong password",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "d74602a0-c2a3-438a-84df-42970b2d6482",
-						"exec": [
-							"pm.test(\"Status code is 401\", function () {",
-							"    pm.response.to.have.status(401);",
-							"});",
-							"",
-							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body(\"access denied\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"username\": \"bob234\",\n    \"password\": \"bobby\",\n    \"display_name\": \"Bobby\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3000/signin/",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"signin",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Signout",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "beea5754-7f27-4377-832d-e6f25116a56f",
-						"exec": [
-							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body(\"Found. Redirecting to /\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"followRedirects": false
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3000/signout/",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"signout",
-						""
-					]
-				}
-			},
-			"response": []
+			"name": "Simple Queries",
+			"item": [],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
