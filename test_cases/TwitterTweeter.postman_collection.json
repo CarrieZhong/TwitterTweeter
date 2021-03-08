@@ -1,0 +1,322 @@
+{
+	"info": {
+		"_postman_id": "faaadb78-4a51-4bb2-a6aa-b1e527d3a60e",
+		"name": "TwitterTweeter Test Cases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Signup: first new account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f475f70f-5977-4779-890c-c3e2d9c1dc21",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body('\"user alice123 signed up\"');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"alice123\",\n    \"password\": \"alice\",\n    \"display_name\": \"Alice\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/signup/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup: existing username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a1f967dc-444e-49ba-9e78-a9ce0e5b7bdf",
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {",
+							"    pm.response.to.have.status(409);",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"username alice123 already exists\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"alice123\",\n    \"password\": \"alice\",\n    \"display_name\": \"Alice\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/signup/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup: second new account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "65190e08-3f0a-4391-b10d-5ebf8f3b183c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"user bob234 signed up\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"bob234\",\n    \"password\": \"bob\",\n    \"display_name\": \"Bobby\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/signup/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signup",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin: correct account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61c4763f-797a-4a78-99ab-a864b69d888c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body('\"user bob234 signed in\"');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"bob234\",\n    \"password\": \"bob\",\n    \"display_name\": \"Bobby\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/signin/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signin",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin: wrong username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "495a4701-c1a8-4b1d-9072-ef77f7c844a9",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"access denied\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"bob\",\n    \"password\": \"bob\",\n    \"display_name\": \"Bobby\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/signin/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signin",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signin: wrong password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d74602a0-c2a3-438a-84df-42970b2d6482",
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});",
+							"",
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"access denied\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"bob234\",\n    \"password\": \"bobby\",\n    \"display_name\": \"Bobby\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/signin/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signin",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "beea5754-7f27-4377-832d-e6f25116a56f",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"Found. Redirecting to /\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/signout/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"signout",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
