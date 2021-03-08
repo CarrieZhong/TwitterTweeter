@@ -1,0 +1,24 @@
+{
+  "name": "twittertweeter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "twitter_tweeter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarrieZhong/TwitterTweeter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CarrieZhong/TwitterTweeter/issues"
+  },
+  "homepage": "https://github.com/CarrieZhong/TwitterTweeter#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "nedb": "^1.8.0"
+  }
+}
